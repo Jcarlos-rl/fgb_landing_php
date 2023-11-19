@@ -1,17 +1,17 @@
 <?php
-    class Index extends Controller{
+    class Contacto extends Controller{
 
         public function __construct(){
         }
         
         public function index(){
             $data = [
-                'title' => 'Inicio',
-                'page' => 'index'
+                'title' => 'Contacto',
+                'page' => 'contac'
             ];
 
             $this->view('templates/header', $data);
-            $this->view('index', $data);
+            $this->view('contac', $data);
             $this->view('templates/footer', $data);
         }
     }

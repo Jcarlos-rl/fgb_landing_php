@@ -1,17 +1,17 @@
 <?php
-    class Index extends Controller{
+    class Catalogos extends Controller{
 
         public function __construct(){
         }
         
         public function index(){
             $data = [
-                'title' => 'Inicio',
-                'page' => 'index'
+                'title' => 'Catálogos',
+                'page' => 'catalogue'
             ];
 
             $this->view('templates/header', $data);
-            $this->view('index', $data);
+            $this->view('catalogue', $data);
             $this->view('templates/footer', $data);
         }
     }
