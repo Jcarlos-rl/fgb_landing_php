@@ -52,7 +52,19 @@ btn_login.addEventListener('click', (e)=>{
         return res.json();
     })
     .then(data=>{
-        console.log(data); 
+        console.log(data);
+        if(!data.status){
+            btn_login.classList.remove('cursor-not-allowed');
+            btn_login.innerText = 'Iniciar sesión';
+            btn_login.disabled = false;
+            const error = (data.errorMessage !== undefined) ? data.errorMessage : data.message;
+            error_message.innerText = error;
+            feedback_error.classList.remove('hidden');
+            return;
+        }
+        localStorage.setItem('fgb_token', data.token);
+        feedback_error.classList.add('hidden');
+        window.location.href = base_url + 'dashboard';
     })
     .catch(err => console.log(err))
 })
