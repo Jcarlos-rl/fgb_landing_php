@@ -1,0 +1,12 @@
+{
+    "name": "carlos/public",
+    "authors": [
+        {
+            "name": "jc dev"
+        }
+    ],
+    "require": {
+        "mongodb/mongodb": "^1.11",
+        "firebase/php-jwt": "^6.1"
+    }
+}

@@ -26,6 +26,7 @@
         <?php if (isset($data['extra_css']))  echo $data['extra_css'] ?>
     </head>
     <body>
+        <?php if(isset($data['page'])){ ?>
         <section id="sidenav" class="bg-white h-full w-[0px] fixed z-30 top-0 left-0 overflow-x-hidden flex flex-col justify-between pb-[60px]" style="transition: 0.5s;">
             <nav>
                 <div class="flex justify-center p-8">
@@ -90,3 +91,4 @@
                 </nav>
             </div>
         </header>
+        <?php } ?>

@@ -1,3 +1,4 @@
+        <?php if(isset($data['page'])){ ?>
         <footer>
             <div class="container mx-auto py-6 md:py-0">
                 <div class="rounded-lg px-10 py-20 flex flex-col md:flex-row justify-between shadow-2xl">
@@ -31,9 +32,11 @@
                 <p class="py-10">© 2023 First Global Broker. Todos los derechos reservados</p>
             </div>
         </footer>
+        <?php } ?>
         <script>
             const base_url = '<?= base_url ?>';
 
+            <?php if(isset($data['page'])){ ?>
             const open_sidenav = document.querySelector('#open_sidenav'),
                 sidenav = document.querySelector('#sidenav'),
                 close_sidenav = document.querySelector('#close_sidenav');
@@ -49,6 +52,7 @@
                 open_sidenav.style.display = 'block';
                 close_sidenav.style.display = 'none';
             })
+            <?php } ?>
         </script>
         <?php if (isset($data['extra_js']))  echo $data['extra_js'] ?>
     </body>
