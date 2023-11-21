@@ -24,14 +24,80 @@
                 <p>The tab JavaScript swaps classes to control the content visibility and styling.</p>
             </div>
             <div class="pages hidden" id="newsletter">
-                <h3 class="text-lg font-bold mb-2">Newsletter Tab</h3>
-                <p class="mb-2">This is some placeholder content the Profile tab's associated content, clicking another tab will toggle the visibility of this one for the next.</p>
-                <p>The tab JavaScript swaps classes to control the content visibility and styling.</p>
+                <h3 class="text-lg font-bold mb-5">Newsletter Tab</h3>
+                <?php
+                if(count($data['newsletters'])>0){
+                ?>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full bg-white border border-gray-300">
+                            <thead>
+                                <tr>
+                                    <th class="py-2 px-4 border-b">Correo Electrónico</th>
+                                    <th class="py-2 px-4 border-b">Fecha</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                foreach ($data['newsletters'] as $newsletter) {
+                                ?>
+                                <tr>
+                                    <td class="py-2 px-4 border-b"><?= $newsletter['email'] ?></td>
+                                    <td class="py-2 px-4 border-b"><?= $newsletter['createdAt'] ?></td>
+                                </tr>
+                                <?php
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
+                <?php
+                }else{
+                ?>
+                    <p>Lo sentimos, no existen registros de newsletter.</p>
+                <?php
+                }
+                ?>
             </div>
             <div class="pages hidden" id="contacto">
-                <h3 class="text-lg font-bold mb-2">Contacto Tab</h3>
-                <p class="mb-2">This is some placeholder content the Profile tab's associated content, clicking another tab will toggle the visibility of this one for the next.</p>
-                <p>The tab JavaScript swaps classes to control the content visibility and styling.</p>
+                <h3 class="text-lg font-bold mb-5">Contacto Tab</h3>
+                <?php
+                if(count($data['contacs'])>0){
+                ?>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full bg-white border border-gray-300">
+                            <thead>
+                                <tr>
+                                    <th class="py-2 px-4 border-b">Nombre</th>
+                                    <th class="py-2 px-4 border-b">Correo Electrónico</th>
+                                    <th class="py-2 px-4 border-b">Teléfono</th>
+                                    <th class="py-2 px-4 border-b">Mensaje</th>
+                                    <th class="py-2 px-4 border-b">Fecha</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                foreach ($data['contacs'] as $contac) {
+                                ?>
+                                <tr>
+                                    <td class="py-2 px-4 border-b"><?= $contac['name'] ?></td>
+                                    <td class="py-2 px-4 border-b"><?= $contac['email'] ?></td>
+                                    <td class="py-2 px-4 border-b"><?= $contac['phone'] ?></td>
+                                    <td class="py-2 px-4 border-b"><?= $contac['message'] ?></td>
+                                    <td class="py-2 px-4 border-b"><?= $contac['createdAt'] ?></td>
+                                </tr>
+                                <?php
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
+                <?php
+                }else{
+                ?>
+                    <p>Lo sentimos, no existen registros de contacto.</p>
+                <?php
+                }
+                ?>
             </div>
         </div>
     </div>

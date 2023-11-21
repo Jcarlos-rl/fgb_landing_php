@@ -46,34 +46,16 @@ class Database
         return new ObjectId($id);
     }
 
-    public function afterUpdate(){
-        return ['returnDocument' => MongoDB\Operation\FindOneAndUpdate::RETURN_DOCUMENT_AFTER];
-    }
-
     public function createdAt($data){
         $data['createdAt'] = date('Y-m-d H:i:s');
         return $data;
     }
 
-    public function updatedAt($data){
-        $data['updatedAt'] = date('Y-m-d H:i:s');
-        return $data;
-    }
-
-    public function findOne($query){
-        $response['status'] = true;
-        try{
-            $response['data'] = $this->getCollection($this->collection)->findOne($query);
-        }catch(Exception $e){
-            $response = $this->errorGeneral($e->getMessage());
-        }
-        return $response;
-    }
-
     public function find($query, $index = 0, $quantity = 25, $order = []){
         $response['status'] = true;
         try{
-            $response['data'] = $this->getCollection($this->collection)->find($query, ['skip' => $index, 'limit' => $quantity, 'sort' => $order])->toArray();
+            //$response['data'] = $this->getCollection($this->collection)->find($query, ['skip' => $index, 'limit' => $quantity, 'sort' => $order])->toArray();
+            $response['data'] = $this->getCollection($this->collection)->find($query)->toArray();
         }catch(Exception $e){
             $response = $this->errorGeneral($e->getMessage());
         }
@@ -87,31 +69,6 @@ class Database
             $response['data'] = $this->getCollection($this->collection)->insertOne($data);
         }catch(Exception $e){
             $response = $this->errorGeneral($e->getMessage());
-        }
-
-        return $response;
-    }
-
-    public function aggregate($query){
-        $response['status'] = true;
-        try{
-            $response['data'] = $this->getCollection($this->collection)->aggregate($query)->toArray();
-        }catch(Exception $e){
-            $response = $this->errorGeneral($e->getMessage());
-        }
-        return $response;
-    }
-
-    public function findOneAndUpdate($filter, $data){
-        $response['status'] = true;
-        try{
-            $data = $this->updatedAt($data);
-            $prevDoc = $this->findOne($filter);
-            $query = ['$set' => $data];
-            $response['data'] = $this->getCollection($this->collection)->findOneAndUpdate($filter, $query, $this->afterUpdate());
-            $this->log($prevDoc, 'UPDATE');
-        }catch(Exception $e){
-            $response = $this->db->errorGeneral($e->getMessage());
         }
 
         return $response;
