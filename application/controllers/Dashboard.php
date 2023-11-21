@@ -10,10 +10,10 @@
         
         public function index(){
 
-            $this->User->accessControl();
+            //$this->User->accessControl();
 
             $data = [
-                'title' => 'Inicio'
+                'title' => 'Dashboard'
             ];
 
             $this->view('templates/header', $data);
