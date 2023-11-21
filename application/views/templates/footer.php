@@ -25,11 +25,12 @@
                     </div>
                     <div>
                         <p class="font-medium">Suscribete a nuestro newsletter</p>
-                        <input type="email" name="email" class="my-3 block w-full rounded-md border-0 py-3 px-4 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6" placeholder="mail@mail.com">
-                        <button class="bg-fgb-blue-dark rounded-md text-white py-4 px-8 shadow-lg shadow-fgb-blue-dark hover:bg-fgb-blue-light hover:shadow-fgb-blue-light">Suscribirme</button>
+                        <input type="email" id="email" class="mt-3 mb-1 block w-full rounded-md border-0 py-3 px-4 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6" placeholder="ejemplo@email.com">
+                        <p id="error_message" class="hidden text-xs mb-3"></p>
+                        <button id="newsletter" class="bg-fgb-blue-dark rounded-md text-white py-4 px-8 shadow-lg shadow-fgb-blue-dark hover:bg-fgb-blue-light hover:shadow-fgb-blue-light">Suscribirme</button>
                     </div>
                 </div>
-                <p class="py-10">© 2023 First Global Broker. Todos los derechos reservados</p>
+                <p class="py-10">© <?= Date('Y') ?> First Global Broker. Todos los derechos reservados</p>
             </div>
         </footer>
         <?php } ?>
@@ -39,7 +40,10 @@
             <?php if(isset($data['page'])){ ?>
             const open_sidenav = document.querySelector('#open_sidenav'),
                 sidenav = document.querySelector('#sidenav'),
-                close_sidenav = document.querySelector('#close_sidenav');
+                close_sidenav = document.querySelector('#close_sidenav'),
+                email = document.querySelector('#email'),
+                newsletter = document.querySelector('#newsletter'),
+                error_message = document.querySelector('#error_message');
 
             open_sidenav.addEventListener('click', ()=>{
                 sidenav.style.width = '250px';
@@ -51,6 +55,56 @@
                 sidenav.style.width = '0px';
                 open_sidenav.style.display = 'block';
                 close_sidenav.style.display = 'none';
+            })
+
+            newsletter.addEventListener('click', ()=>{
+                
+                if(email.value === ''){
+                    error_message.innerText = `El correo electrónico es requerido.`;
+                    error_message.classList.add('text-red-500');
+                    error_message.classList.remove('hidden');
+                    return;
+                }
+
+                const emailPattern = /^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/i;
+                if (!emailPattern.test(email.value)) {
+                    error_message.innerText = `El correo electrónico no es valido.`;
+                    error_message.classList.add('text-red-500');
+                    error_message.classList.remove('hidden');
+                    return;
+                }
+
+                let myFormData = new FormData();
+
+                myFormData.append('email', email.value);
+
+                error_message.classList.add('hidden');
+                error_message.classList.remove('text-red-500');
+                newsletter.classList.add('cursor-not-allowed');
+                newsletter.innerText = 'Enviando...';
+                newsletter.disabled = true;
+                
+                fetch(`${ base_url }index/newsletter`,{
+                    method: 'POST',
+                    body: myFormData
+                })
+                .then((res) =>{
+                    if(res.status === 500){
+                        newsletter.classList.remove('cursor-not-allowed');
+                        newsletter.innerText = 'Suscribirme';
+                        newsletter.disabled = false;
+                        throw new Error(`${res.statusText}`);
+                    }
+
+                    return res.json();
+                })
+                .then(data=>{
+                    newsletter.innerText = 'Suscribirme';
+                    error_message.innerText = 'Gracias por suscribirse a nuestro newsletter.';
+                    error_message.classList.remove('hidden');
+                    error_message.classList.add('text-green-500');
+                })
+                .catch(err => console.log(err))
             })
             <?php } ?>
         </script>
