@@ -7,7 +7,10 @@
         public function index(){
             $data = [
                 'title' => 'Contacto',
-                'page' => 'contac'
+                'page' => 'contac',
+                'extra_js' => '
+                    <script src="'. base_url .'public/js/contac.js"></script>
+                '
             ];
 
             $this->view('templates/header', $data);

@@ -5,7 +5,6 @@
     class Index extends Controller{
 
         public function __construct(){
-            $this->database = new Database('newsletter');
         }
         
         public function index(){
@@ -20,7 +19,22 @@
         }
 
         public function newsletter(){
-            $insert = $this->database->insertOne(['email' => $_REQUEST['email']]);
+            $database = new Database('newsletter');
+            $insert = $database->insertOne(['email' => $_REQUEST['email']]);
+            echo json_encode($insert);
+        }
+
+        public function contac(){
+            $database = new Database('contac');
+
+            $data = [
+                'name' => $_REQUEST['nombre'],
+                'email' => $_REQUEST['email'],
+                'phone' => $_REQUEST['telefono'],
+                'message' => $_REQUEST['mensaje']
+            ];
+
+            $insert = $database->insertOne($data);
             echo json_encode($insert);
         }
     }
