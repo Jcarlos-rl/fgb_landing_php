@@ -47,10 +47,19 @@ class Database
         return $data;
     }
 
+    public function findOne($query){
+        $response['status'] = true;
+        try{
+            $response['data'] = $this->getCollection($this->collection)->findOne($query);
+        }catch(Exception $e){
+            $response = $this->errorGeneral($e->getMessage());
+        }
+        return $response;
+    }
+
     public function find($query, $index = 0, $quantity = 25, $order = []){
         $response['status'] = true;
         try{
-            //$response['data'] = $this->getCollection($this->collection)->find($query, ['skip' => $index, 'limit' => $quantity, 'sort' => $order])->toArray();
             $response['data'] = $this->getCollection($this->collection)->find($query)->toArray();
         }catch(Exception $e){
             $response = $this->errorGeneral($e->getMessage());

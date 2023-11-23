@@ -21,6 +21,36 @@
             <div class="pages" id="catalogos">
                 <h3 class="text-lg font-bold mb-2">Catálogos Tab</h3>
                 <button id="new_catalogue" class="items-center px-4 py-3 rounded-lg text-white bg-blue-700 active dark:bg-blue-600">Nuevo catálogo</button>
+                <?php
+                if(count($data['files'])>0){
+                ?>
+                    <div class="overflow-x-auto mt-5">
+                        <table class="min-w-full bg-white border border-gray-300">
+                            <thead>
+                                <tr>
+                                    <th class="py-2 px-4 border-b">Marca</th>
+                                    <th class="py-2 px-4 border-b">Archivo</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                foreach ($data['files'] as $key=>$files) {
+                                    foreach ($files as $file) {
+                                ?>
+                                <tr>
+                                    <td class="py-2 px-4 border-b"><?= ucfirst($key) ?></td>
+                                    <td class="py-2 px-4 border-b"><a href="<?= base_url ?>public/media/catalogues/<?= $key ?>/<?= $file ?>" target="_blank"><?= $file ?></a></td>
+                                </tr>
+                                <?php
+                                    }
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
+                <?php
+                }
+                ?>
             </div>
             <div class="pages hidden" id="newsletter">
                 <h3 class="text-lg font-bold mb-5">Newsletter Tab</h3>
@@ -101,7 +131,7 @@
         </div>
     </div>
     <!-- Modal -->
-    <div id="miModal" class="fixed inset-0 z-50 overflow-auto bg-smoke-dark flex items-center justify-center">
+    <div id="miModal" class="fixed inset-0 z-50 overflow-auto bg-smoke-dark flex items-center justify-center hidden">
         <div class="bg-white w-11/12 md:w-3/4 lg:w-1/2 p-6 rounded drop-shadow-2xl">
             <div class="mb-4 flex justify-between">
                 <h3 class="text-2xl font-semibold">Nuevo catálogo</h3>
@@ -224,9 +254,9 @@
         myFormData.append('brand',(myFormData.get('newBrand') === '') ? myFormData.get('brand') : createSlug(myFormData.get('newBrand')));
 
         feedback_error.classList.add('hidden');
-        /* btn_save.classList.add('cursor-not-allowed');
+        btn_save.classList.add('cursor-not-allowed');
         btn_save.innerText = 'Guardando...';
-        btn_save.disabled = true; */
+        btn_save.disabled = true;
 
         fetch(`${ base_url }dashboard/create`,{
             method: 'POST',
@@ -243,7 +273,15 @@
             return res.json();
         })
         .then(data=>{
-            console.log(data)
+            if(data.status){
+                location.reload();
+            }else{
+                feedback_error.childNodes[1].childNodes[3].innerText = data.errorMessage;
+                feedback_error.classList.remove('hidden');
+                btn_save.classList.remove('cursor-not-allowed');
+                btn_save.innerText = 'Guardar';
+                btn_save.disabled = false;
+            }
         })
         .catch(err=>console.log(err))
     });

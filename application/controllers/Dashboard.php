@@ -20,6 +20,7 @@
             $dir = BASE_PATH . 'public/media/catalogues';
             $scanDir = scandir($dir);
 
+            $brands = [];
             foreach ($scanDir as $key => $brand) {
                 if(!in_array($brand, array('.', '..'))){
                     $pdfs = scandir($dir . '/' . $brand);
@@ -31,7 +32,7 @@
                 }
             }
 
-            //$this->User->accessControl();
+            $this->User->accessControl();
 
             $data = [
                 'title' => 'Dashboard',

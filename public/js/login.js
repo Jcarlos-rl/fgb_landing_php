@@ -52,7 +52,6 @@ btn_login.addEventListener('click', (e)=>{
         return res.json();
     })
     .then(data=>{
-        console.log(data);
         if(!data.status){
             btn_login.classList.remove('cursor-not-allowed');
             btn_login.innerText = 'Iniciar sesión';

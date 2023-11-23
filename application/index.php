@@ -8,4 +8,7 @@
     spl_autoload_register(function($nameClass){
         require_once 'libraries/' . '$nameClass' . '.php';
     });
+
+    ini_set('log_errros', '1');
+    ini_set('error_log', BASE_PATH.'public/media/errors/db/errors.log');
 ?>
