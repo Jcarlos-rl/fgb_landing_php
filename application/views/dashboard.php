@@ -20,8 +20,7 @@
         <div class="p-6 text-medium rounded-lg w-full">
             <div class="pages" id="catalogos">
                 <h3 class="text-lg font-bold mb-2">Catálogos Tab</h3>
-                <p class="mb-2">This is some placeholder content the Profile tab's associated content, clicking another tab will toggle the visibility of this one for the next.</p>
-                <p>The tab JavaScript swaps classes to control the content visibility and styling.</p>
+                <button id="new_catalogue" class="items-center px-4 py-3 rounded-lg text-white bg-blue-700 active dark:bg-blue-600">Nuevo catálogo</button>
             </div>
             <div class="pages hidden" id="newsletter">
                 <h3 class="text-lg font-bold mb-5">Newsletter Tab</h3>
@@ -101,10 +100,64 @@
             </div>
         </div>
     </div>
+    <!-- Modal -->
+    <div id="miModal" class="fixed inset-0 z-50 overflow-auto bg-smoke-dark flex items-center justify-center">
+        <div class="bg-white w-11/12 md:w-3/4 lg:w-1/2 p-6 rounded drop-shadow-2xl">
+            <div class="mb-4 flex justify-between">
+                <h3 class="text-2xl font-semibold">Nuevo catálogo</h3>
+                <svg class="cursor-pointer" id="closeModal" width="28" height="28" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path fill="#000000" d="M18.3 5.71a.996.996 0 0 0-1.41 0L12 10.59L7.11 5.7A.996.996 0 1 0 5.7 7.11L10.59 12L5.7 16.89a.996.996 0 1 0 1.41 1.41L12 13.41l4.89 4.89a.996.996 0 1 0 1.41-1.41L13.41 12l4.89-4.89c.38-.38.38-1.02 0-1.4z"/>
+                </svg>
+            </div>
+            <div>
+                <section id="feedback_error" class="hidden">
+                    <div class="flex justify-center items-center p-3 mb-8 border border-red-400 rounded">
+                        <svg class="text-red-400" width="28" height="28" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+                            <path fill="currentColor" d="M25 42c-9.4 0-17-7.6-17-17S15.6 8 25 8s17 7.6 17 17s-7.6 17-17 17zm0-32c-8.3 0-15 6.7-15 15s6.7 15 15 15s15-6.7 15-15s-6.7-15-15-15z"/>
+                            <path fill="currentColor" d="M24 32h2v2h-2zm1.6-2h-1.2l-.4-8v-6h2v6z"/>
+                        </svg>
+                        <p class="ml-3 font-medium"></p>
+                    </div>
+                </section>
+                <form>
+                    <div class="mb-4">
+                        <label for="brand" class="block font-bold mb-2">Marca</label>
+                        <select id="brand" class="w-full border-2 border-gray-300 p-2 rounded focus:outline-none focus:border-blue-500" name="brand" id="">
+                            <option value="" selected disabled>Selecciona una marca</option>
+                            <?php
+                                foreach ($data['files'] as $brand=>$file) {
+                            ?>
+                                <option value="<?= $brand ?>"><?= ucfirst($brand) ?></option>
+                            <?php
+                            }
+                            ?>
+                                <option value="otro">Otro</option>
+                        </select>
+                    </div>
+                    <div id="contentNewBrand" class="mb-4 hidden">
+                        <label for="newBrand" class="block font-bold mb-2">Ingresa la marca</label>
+                        <input type="text" name="newBrand" class="w-full border-2 border-gray-300 p-2 rounded focus:outline-none focus:border-blue-500">
+                    </div>
+                    <div class="mb-1">
+                        <label for="file" class="block font-bold mb-2">Archivo</label>
+                        <input type="file" name="file" class="w-full border-2 border-gray-300 p-2 rounded focus:outline-none focus:border-blue-500">
+                    </div>
+                    <button type="submit" id="btn_save" class="w-full bg-blue-500 text-white px-4 py-2 rounded focus:outline-none hover:bg-blue-600 mt-7 mb-4">Guardar</button>
+                </form>
+            </div>
+        </div>
+    </div>
 </section>
 <script>
     const selectPages = document.querySelectorAll('.select-page'),
-        pages = document.querySelectorAll('.pages');
+        pages = document.querySelectorAll('.pages'),
+        new_catalogue = document.querySelector('#new_catalogue'),
+        miModal = document.querySelector('#miModal'),
+        closeModal = document.querySelector('#closeModal'),
+        brand = document.querySelector('#brand'),
+        contentNewBrand = document.querySelector('#contentNewBrand'),
+        form = document.querySelector('form'),
+        feedback_error = document.querySelector('#feedback_error');
 
     selectPages.forEach(element => {
         element.addEventListener('click', ()=>{
@@ -127,4 +180,80 @@
         });
     });
 
+    new_catalogue.addEventListener('click', ()=>{
+        miModal.classList.remove('hidden');
+    });
+
+    closeModal.addEventListener('click', ()=>{
+        miModal.classList.add('hidden');
+    });
+
+    brand.addEventListener('change', ()=>{
+        if(brand.value === 'otro'){
+            contentNewBrand.classList.remove('hidden');
+        }else{
+            contentNewBrand.classList.add('hidden');
+        }
+    });
+
+    btn_save.addEventListener('click', (e)=>{
+        e.preventDefault();
+
+        let myFormData = new FormData(form);
+        
+        if(myFormData.get('brand') === '' || myFormData.get('file').name === ''){
+            feedback_error.childNodes[1].childNodes[3].innerText = 'Todos los campos son requeridos.';
+            feedback_error.classList.remove('hidden');
+            return;
+        }
+
+        if(myFormData.get('brand') === 'otro' && myFormData.get('newBrand') === ''){
+            feedback_error.childNodes[1].childNodes[3].innerText = 'Todos los campos son requeridos.';
+            feedback_error.classList.remove('hidden');
+            return;
+        }
+
+        for (let i = 0; i < brand.options.length; i++) {
+            if(brand.options[i].value !== '' && brand.options[i].value === createSlug(myFormData.get('newBrand'))){
+                feedback_error.childNodes[1].childNodes[3].innerText = 'La marca ingresada ya existe.';
+                feedback_error.classList.remove('hidden');
+                return;
+            }
+        }
+        
+        myFormData.append('brand',(myFormData.get('newBrand') === '') ? myFormData.get('brand') : createSlug(myFormData.get('newBrand')));
+
+        feedback_error.classList.add('hidden');
+        /* btn_save.classList.add('cursor-not-allowed');
+        btn_save.innerText = 'Guardando...';
+        btn_save.disabled = true; */
+
+        fetch(`${ base_url }dashboard/create`,{
+            method: 'POST',
+            body: myFormData
+        })
+        .then((res) =>{
+            if(res.status === 500){
+                btn_save.classList.remove('cursor-not-allowed');
+                btn_save.innerText = 'Guardar';
+                btn_save.disabled = false;
+                throw new Error(`${res.statusText}`);
+            }
+
+            return res.json();
+        })
+        .then(data=>{
+            console.log(data)
+        })
+        .catch(err=>console.log(err))
+    });
+
+    function createSlug(text){
+        return text
+        .toLowerCase()
+        .replace(/[^\w\s-]/g, '')
+        .replace(/\s+/g, '_')
+        .replace(/--+/g, '_')
+        .trim();
+    }
 </script>

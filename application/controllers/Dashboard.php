@@ -1,13 +1,13 @@
 <?php
 
-    BASE_PATH . 'application/models/Database.php';
-
     require_once BASE_PATH . 'application/models/User.php';
+    require_once BASE_PATH . 'application/libraries/Resources.php';
 
     class Dashboard extends Controller{
 
         public function __construct(){
             $this->User = new User(CRYPTO_KEY);
+            $this->Resources = new ResourcesFunctions();
         }
         
         public function index(){
@@ -17,17 +17,41 @@
             $contacCollection = new Database('contac');
             $contacs = $contacCollection->find([]);
 
+            $dir = BASE_PATH . 'public/media/catalogues';
+            $scanDir = scandir($dir);
+
+            foreach ($scanDir as $key => $brand) {
+                if(!in_array($brand, array('.', '..'))){
+                    $pdfs = scandir($dir . '/' . $brand);
+                    foreach ($pdfs as $pdf) {
+                        if(!in_array($pdf, array('.','..'))){
+                            $brands[$brand][] = $pdf;
+                        }
+                    }
+                }
+            }
+
             //$this->User->accessControl();
 
             $data = [
                 'title' => 'Dashboard',
                 'newsletters' => $newletters['data'],
-                'contacs' => $contacs['data']
+                'contacs' => $contacs['data'],
+                'files' => $brands
             ];
 
             $this->view('templates/header', $data);
             $this->view('dashboard', $data);
             $this->view('templates/footer', $data);
+        }
+
+        public function create(){
+
+            $path = BASE_PATH . 'public/media/catalogues/' . $_REQUEST['brand'];
+
+            $save = $this->Resources->saveFile($_FILES['file'], $path);
+
+            echo json_encode($save);
         }
     }
 ?>

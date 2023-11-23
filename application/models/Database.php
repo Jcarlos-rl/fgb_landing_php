@@ -42,10 +42,6 @@ class Database
         ];
     }
 
-    public function objectId($id){
-        return new ObjectId($id);
-    }
-
     public function createdAt($data){
         $data['createdAt'] = date('Y-m-d H:i:s');
         return $data;
@@ -72,16 +68,5 @@ class Database
         }
 
         return $response;
-    }
-
-    protected function log($prevDoc, $type){
-        $data['collection'] = $this->collection;
-        $data['event'] = $type;
-        $data['idDoc'] = $prevDoc['data']['_id']->__toString();
-        $data['prevDoc'] = $prevDoc['data'];
-
-        $data = $this->createdAt($data);
-
-        $this->getCollection('log')->insertOne($data);
     }
 }
