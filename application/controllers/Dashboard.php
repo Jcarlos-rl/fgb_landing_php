@@ -22,10 +22,10 @@
 
             $brands = [];
             foreach ($scanDir as $key => $brand) {
-                if(!in_array($brand, array('.', '..'))){
+                if(!in_array($brand, array('.', '..', '.DS_Store'))){
                     $pdfs = scandir($dir . '/' . $brand);
                     foreach ($pdfs as $pdf) {
-                        if(!in_array($pdf, array('.','..'))){
+                        if(!in_array($pdf, array('.','..', '.DS_Store'))){
                             $brands[$brand][] = $pdf;
                         }
                     }
