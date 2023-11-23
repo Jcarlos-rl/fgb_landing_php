@@ -6,7 +6,7 @@
                     <h1 class="text-2xl font-medium text-fgb-blue mt-10 md:mt-0">First Global Broker</h1>
                     <p class="text-4xl  md:text-5xl lg:text-6xl font-bold text-fgb-blue-dark my-7 pb-8">Soluciones industriales de <span class="border-b-[10px] border-fgb-blue-light pb-4">calidad.</span></p>
                     <p class="text-lg mb-10">Equipos, herramientas y servicios industriales de excelencia: ¡su socio global para el éxito!</p>
-                    <a class="bg-fgb-blue-dark rounded-md text-white py-4 px-8 shadow-lg shadow-fgb-blue-dark hover:bg-fgb-blue-light hover:shadow-fgb-blue-light" href="/catalogos">Ver catálogos</a>
+                    <a class="bg-fgb-blue-dark rounded-md text-white py-4 px-8 shadow-lg shadow-fgb-blue-dark hover:bg-fgb-blue-light hover:shadow-fgb-blue-light" href="catalogos">Ver catálogos</a>
                 </div>
             </div>
             <div class="col-span-12 md:col-span-5 order-1 md:order-2 grid grid-cols-10">
@@ -29,17 +29,17 @@
             <div class="rounded-lg px-[70px] py-6 bg-gradient-to-r from-[#169ed0] via-fgb-blue-light to-[#75cff0] absolute right-14 mt-[350px] shadow-2xl shadow-fgb-blue-light">
                 <p class="text-center font-medium text-2xl mb-5 text-white">Contáctanos</p>
                 <div class="flex gap-10 text-white hover:[&>a]:text-fgb-blue-dark">
-                    <a href="#">
+                    <a href="mailto:ventas@fgbmexico.com">
                         <svg width="25" height="25" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path fill="currentColor" d="m20 8l-8 5l-8-5V6l8 5l8-5m0-2H4c-1.11 0-2 .89-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Z"/>
                         </svg>
                     </a>
-                    <a href="#">
+                    <a href="https://www.facebook.com/FGBMEXICO" target="_blank">
                         <svg width="25" height="25" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path fill="currentColor" d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/>
                         </svg>
                     </a>
-                    <a href="#">
+                    <a href="tel:2222311972">
                         <svg width="25" height="25" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path fill="currentColor" d="m19.23 15.26l-2.54-.29a1.99 1.99 0 0 0-1.64.57l-1.84 1.84a15.045 15.045 0 0 1-6.59-6.59l1.85-1.85c.43-.43.64-1.03.57-1.64l-.29-2.52a2.001 2.001 0 0 0-1.99-1.77H5.03c-1.13 0-2.07.94-2 2.07c.53 8.54 7.36 15.36 15.89 15.89c1.13.07 2.07-.87 2.07-2v-1.73c.01-1.01-.75-1.86-1.76-1.98z"/>
                         </svg>
@@ -52,7 +52,7 @@
                 <p class="text-fgb-blue text-2xl font-medium">Acerca de nosotros</p>
                 <h2 class="text-fgb-blue-black text-4xl my-5 font-bold">Excelencia industrial a su alcance</h2>
                 <p class="text-fgb-blue-black text-lg mb-[50px]">Bienvenido a First Global Broker, su proveedor líder en equipos, herramientas y servicios industriales de alta calidad. Nos enorgullecemos de ofrecer una amplia gama de productos nacionales de primera calidad y de importar productos de las principales regiones industriales del mundo, como Estados Unidos, Europa, Asia y Latinoamérica. Sea cual sea la tarea o necesidad de su empresa, estamos aquí para proporcionar soluciones confiables y eficientes que impulsen su éxito.</p>
-                <a class="bg-fgb-blue-dark rounded-md text-white py-4 px-8 shadow-lg shadow-fgb-blue-dark hover:bg-fgb-blue-light hover:shadow-fgb-blue-light" href="/catalogos">Ver catálogos</a>
+                <a class="bg-fgb-blue-dark rounded-md text-white py-4 px-8 shadow-lg shadow-fgb-blue-dark hover:bg-fgb-blue-light hover:shadow-fgb-blue-light" href="catalogos">Ver catálogos</a>
             </div>
         </div>
     </section>

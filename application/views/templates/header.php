@@ -52,7 +52,7 @@
                     </svg>
                     <div>
                         <p class="text-fgb-blue-dark font-medium">Llamanos</p>
-                        <p class="text-fgb-blue border-b-2 border-fgb-blue-light">+52 222 2222 222</p>
+                        <p class="text-fgb-blue border-b-2 border-fgb-blue-light">+52 (222) 231 1972</p>
                     </div>
                 </div>
             </nav>
@@ -86,7 +86,7 @@
                     </svg>
                     <div class="hidden sm:block">
                         <p class="text-fgb-blue-dark font-medium">Llamanos</p>
-                        <p class="text-fgb-blue border-b-2 border-fgb-blue-light">+52 222 2222 222</p>
+                        <p class="text-fgb-blue border-b-2 border-fgb-blue-light">+52 (222) 231 1972</p>
                     </div>
                 </nav>
             </div>

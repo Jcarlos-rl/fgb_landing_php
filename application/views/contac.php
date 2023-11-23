@@ -4,7 +4,7 @@
             <h1 class="text-4xl font-bold text-fgb-blue-dark mb-3">Contacto</h1>
             <p class="text-base">¡Conéctate con nosotros! Estamos aquí para escucharte. Completa este formulario y déjanos saber cómo podemos ayudarte. Tu mensaje es importante para nosotros.</p>
             <h3 class="text-2xl font-medium text-fgb-blue mt-10 mb-2">Telefono</h3>
-            <a class="text-base">+52 222 2222 222</a>
+            <a class="text-base">+52 (222) 231 1972</a>
             <h3 class="text-2xl font-medium text-fgb-blue mt-10 mb-2">Email</h3>
             <a class="text-base">ventas@fgbmexico.com</a>
         </div>
