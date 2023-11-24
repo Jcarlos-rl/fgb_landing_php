@@ -32,7 +32,7 @@ btn_contac.addEventListener('click', (e)=>{
     btn_contac.innerText = 'Enviando...';
     btn_contac.disabled = true;
 
-    fetch(`${ base_url }index/contac`,{
+    fetch(`${ base_url }index/contacJSON`,{
         method: 'POST',
         body: myFormData
     })

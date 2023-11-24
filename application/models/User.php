@@ -9,6 +9,8 @@
         private $secretKey;
         private $expirationTime;
         private $encrypt = 'HS256';
+        private $email = "ventas@fgbmexico.com";
+        private $password = '$2y$10$uF30divXM.E.3vZ4Sre8auup59/7.dQnqVqb5zNsDlsL17c4BH0xS';
 
         public function __construct($secretKey, $expirationTime = 3600){
             $this->secretKey = $secretKey;
@@ -17,23 +19,9 @@
         }
 
         public function login($email, $password){
-            $query = [
-                'email' => $email
-            ];
-            $user = $this->database->findOne($query);
-
-            //Ocurrio un error en la DB
-            if(!$user['status']){
-                $response = [
-                    'status' => false,
-                    'message' => 'Lo sentimos, ocurrio un problema.'
-                ];
-                
-                return $response;
-            }
-
+            
             //No se encontro registro
-            if(!$user['data']){
+            if($email != $this->email){
                 $response = [
                     'status' => false,
                     'message' => 'Lo sentimos, usuario o contraseña incorrectos.'
@@ -43,7 +31,7 @@
             }
 
             //Validar contraseñas
-            if(!password_verify($password, $user['data']['password'])){
+            if(!password_verify($password, $this->password)){
                 $response = [
                     'status' => false,
                     'message' => 'Lo sentimos, usuario o contraseña incorrectos.'
@@ -53,14 +41,14 @@
             }
 
             $userObj = new JSONWT(
-                $user['data']['_id']->__toString(), 
-                $user['data']['email'],
+                uniqid(), 
+                $this->email,
             );
             $token = $userObj->generateToken($this->secretKey, $this->expirationTime, $this->encrypt);
             
             $response = [
                 'status' => true,
-                'email' => $user['data']['email'],
+                'email' => $this->email,
                 'token' => $token
             ];
 

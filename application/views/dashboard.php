@@ -55,34 +55,32 @@
             <div class="pages hidden" id="newsletter">
                 <h3 class="text-lg font-bold mb-5">Newsletter Tab</h3>
                 <?php
-                if(count($data['newsletters'])>0){
+                if(count($data['newsletters'])> 0){
                 ?>
-                    <div class="overflow-x-auto">
-                        <table class="min-w-full bg-white border border-gray-300">
-                            <thead>
-                                <tr>
-                                    <th class="py-2 px-4 border-b">Correo Electrónico</th>
-                                    <th class="py-2 px-4 border-b">Fecha</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                foreach ($data['newsletters'] as $newsletter) {
-                                ?>
-                                <tr>
-                                    <td class="py-2 px-4 border-b"><?= $newsletter['email'] ?></td>
-                                    <td class="py-2 px-4 border-b"><?= $newsletter['createdAt'] ?></td>
-                                </tr>
-                                <?php
-                                }
-                                ?>
-                            </tbody>
-                        </table>
-                    </div>
+                <div class="overflow-x-auto mt-5">
+                    <table class="min-w-full bg-white border border-gray-300">
+                        <thead>
+                            <tr>
+                                <th class="py-2 px-4 border-b">Email</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            foreach ($data['newsletters'] as $newsletter) {
+                            ?>
+                            <tr>
+                                <td class="py-2 px-4 border-b"><?= $newsletter ?></td>
+                            </tr>
+                            <?php
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
                 <?php
                 }else{
                 ?>
-                    <p>Lo sentimos, no existen registros de newsletter.</p>
+                <p>Lo sentimos, no existen registros.</p>
                 <?php
                 }
                 ?>
@@ -90,40 +88,38 @@
             <div class="pages hidden" id="contacto">
                 <h3 class="text-lg font-bold mb-5">Contacto Tab</h3>
                 <?php
-                if(count($data['contacs'])>0){
+                if(count($data['contacs'])> 0){
                 ?>
-                    <div class="overflow-x-auto">
-                        <table class="min-w-full bg-white border border-gray-300">
-                            <thead>
-                                <tr>
-                                    <th class="py-2 px-4 border-b">Nombre</th>
-                                    <th class="py-2 px-4 border-b">Correo Electrónico</th>
-                                    <th class="py-2 px-4 border-b">Teléfono</th>
-                                    <th class="py-2 px-4 border-b">Mensaje</th>
-                                    <th class="py-2 px-4 border-b">Fecha</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                foreach ($data['contacs'] as $contac) {
-                                ?>
-                                <tr>
-                                    <td class="py-2 px-4 border-b"><?= $contac['name'] ?></td>
-                                    <td class="py-2 px-4 border-b"><?= $contac['email'] ?></td>
-                                    <td class="py-2 px-4 border-b"><?= $contac['phone'] ?></td>
-                                    <td class="py-2 px-4 border-b"><?= $contac['message'] ?></td>
-                                    <td class="py-2 px-4 border-b"><?= $contac['createdAt'] ?></td>
-                                </tr>
-                                <?php
-                                }
-                                ?>
-                            </tbody>
-                        </table>
-                    </div>
+                <div class="overflow-x-auto mt-5">
+                    <table class="min-w-full bg-white border border-gray-300">
+                        <thead>
+                            <tr>
+                                <th class="py-2 px-4 border-b">Nombre</th>
+                                <th class="py-2 px-4 border-b">Email</th>
+                                <th class="py-2 px-4 border-b">Teléfono</th>
+                                <th class="py-2 px-4 border-b">Mensaje</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <?php
+                        foreach ($data['contacs'] as $contac) {
+                        ?>
+                        <tr>
+                            <td class="py-2 px-4 border-b"><?= $contac->name ?></td>
+                            <td class="py-2 px-4 border-b"><?= $contac->email ?></td>
+                            <td class="py-2 px-4 border-b"><?= $contac->phone ?></td>
+                            <td class="py-2 px-4 border-b"><?= $contac->message ?></td>
+                        </tr>
+                        <?php
+                        }
+                        ?>
+                        </tbody>
+                    </table>
+                </div>
                 <?php
                 }else{
                 ?>
-                    <p>Lo sentimos, no existen registros de contacto.</p>
+                <p>Lo sentimos, no existen registros.</p>
                 <?php
                 }
                 ?>

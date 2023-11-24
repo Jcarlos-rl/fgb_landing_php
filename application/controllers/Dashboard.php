@@ -12,10 +12,14 @@
         
         public function index(){
             
-            $newsletterCollection = new Database('newsletter');
-            $newletters = $newsletterCollection->find([]);
-            $contacCollection = new Database('contac');
-            $contacs = $contacCollection->find([]);
+            $fileNewsletter = BASE_PATH . 'public/js/Data/newsletter.json';
+            $fileContac = BASE_PATH . 'public/js/Data/contac.json';
+
+            $contentNewsletter = file_get_contents($fileNewsletter);
+            $newletters = json_decode($contentNewsletter);
+
+            $contentContac = file_get_contents($fileContac);
+            $contacs = json_decode($contentContac);
 
             $dir = BASE_PATH . 'public/media/catalogues';
             $scanDir = scandir($dir);
@@ -36,8 +40,8 @@
 
             $data = [
                 'title' => 'Dashboard',
-                'newsletters' => $newletters['data'],
-                'contacs' => $contacs['data'],
+                'newsletters' => $newletters,
+                'contacs' => $contacs,
                 'files' => $brands
             ];
 

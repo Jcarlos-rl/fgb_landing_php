@@ -1,3 +1,5 @@
 /application/config
 /public/media
 /public/vendor
+/public/js/Data
+.DS_Store

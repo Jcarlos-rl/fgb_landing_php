@@ -6,7 +6,7 @@
     require_once(BASE_PATH.'public/vendor/autoload.php');
 
     spl_autoload_register(function($nameClass){
-        require_once 'libraries/' . '$nameClass' . '.php';
+        require_once "libraries/$nameClass.php";
     });
 
     ini_set('log_errros', '1');

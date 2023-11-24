@@ -90,7 +90,7 @@
                 newsletter.innerText = 'Enviando...';
                 newsletter.disabled = true;
                 
-                fetch(`${ base_url }index/newsletter`,{
+                fetch(`${ base_url }index/newsletterJSON`,{
                     method: 'POST',
                     body: myFormData
                 })
